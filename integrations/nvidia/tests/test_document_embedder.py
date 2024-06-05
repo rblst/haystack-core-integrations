@@ -341,7 +341,7 @@ class TestNvidiaDocumentEmbedder:
     )
     @pytest.mark.integration
     def test_run_integration(self):
-        embedder = NvidiaDocumentEmbedder("playground_nvolveqa_40k")
+        embedder = NvidiaDocumentEmbedder("ai-embed-qa-4")
         embedder.warm_up()
 
         docs = [

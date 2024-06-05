@@ -141,7 +141,7 @@ class TestNvidiaTextEmbedder:
     )
     @pytest.mark.integration
     def test_run_integration_with_nvcf_backend(self):
-        embedder = NvidiaTextEmbedder("playground_nvolveqa_40k")
+        embedder = NvidiaTextEmbedder("ai-embed-qa-4")
         embedder.warm_up()
 
         result = embedder.run("A transformer is a deep learning architecture")

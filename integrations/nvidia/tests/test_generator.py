@@ -167,7 +167,7 @@ class TestNvidiaGenerator:
     def test_run_integration_with_nvcf_backend(self):
         generator = NvidiaGenerator(
             api_url=None,  # force use of deprecated NVCF backend
-            model="playground_nv_llama2_rlhf_70b",
+            model="ai-llama2-70b",
             model_arguments={
                 "temperature": 0.2,
                 "top_p": 0.7,

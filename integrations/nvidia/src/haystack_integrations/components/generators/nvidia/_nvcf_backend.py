@@ -16,9 +16,6 @@ class NvcfBackend(GeneratorBackend):
         model_kwargs: Optional[Dict[str, Any]] = None,
     ):
         warnings.warn("Nvidia NGC is deprecated, use Nvidia NIM instead.", DeprecationWarning, stacklevel=2)
-        if not model.startswith("playground_"):
-            model = f"playground_{model}"
-
         super().__init__(model=model, model_kwargs=model_kwargs)
 
         self.api_key = api_key
