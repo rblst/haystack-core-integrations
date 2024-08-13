@@ -221,15 +221,10 @@ class AnthropicChatGenerator:
                 response.content = [block for block in response.content if isinstance(block, ToolUseBlock)]
             completions = [self._build_message(content_block, response) for content_block in response.content]
 
-        # rename the meta key to be inline with OpenAI meta output keys
-        for response in completions:
-            if response.meta is not None and "usage" in response.meta:
-                response.meta["usage"]["prompt_tokens"] = response.meta["usage"].pop("input_tokens")
-                response.meta["usage"]["completion_tokens"] = response.meta["usage"].pop("output_tokens")
-
         return {"replies": completions}
 
-    def _build_message(self, content_block: Union[TextBlock, ToolUseBlock], message: Message) -> ChatMessage:
+    @staticmethod
+    def _build_message(content_block: Union[TextBlock, ToolUseBlock], message: Message) -> ChatMessage:
         """
         Converts the non-streaming Anthropic Message to a ChatMessage.
         :param content_block: The content block of the message.
@@ -250,7 +245,8 @@ class AnthropicChatGenerator:
         )
         return chat_message
 
-    def _convert_to_anthropic_format(self, messages: List[ChatMessage]) -> List[Dict[str, Any]]:
+    @staticmethod
+    def _convert_to_anthropic_format(messages: List[ChatMessage]) -> List[Dict[str, Any]]:
         """
         Converts the list of ChatMessage to the list of messages in the format expected by the Anthropic API.
         :param messages: The list of ChatMessage.
@@ -284,7 +280,8 @@ class AnthropicChatGenerator:
         )
         return complete_response
 
-    def _build_chunk(self, delta: TextDelta) -> StreamingChunk:
+    @staticmethod
+    def _build_chunk(delta: TextDelta) -> StreamingChunk:
         """
         Converts the ContentBlockDeltaEvent to a StreamingChunk.
         :param delta: The ContentBlockDeltaEvent.
